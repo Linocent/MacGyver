@@ -22,12 +22,10 @@ window = pygame.display.set_mode((side_window, side_window))
 pygame.display.set_caption(title_window)
 
 level_name = 'labyrinthe.txt'
-
 case_x = 1
 case_y = 1
 x = 21
 y = 21
-
 
 stay_open = 1
 while stay_open:
@@ -37,6 +35,7 @@ while stay_open:
     level.show(window)
     # pygame.mixer.music.load(main_theme) # marche pô
     Mc = pygame.image.load(hero_picture)
+    Position = Mc.get_rect()
     window.blit(Mc, (x, y))
 
     for event in pygame.event.get():
@@ -44,12 +43,25 @@ while stay_open:
             stay_open = 0
         elif event.type == KEYDOWN:
             if event.key == K_RIGHT:
-                if case_x < 0:
-                    if [case_y][case_x+1] in lablines != 'm':
-                        case_x += 1
-                        x = case_x * size_sprite
-            window.blit(Mc, (x, y))
-
+                if [case_y] and [case_x + 1] != 'm':
+                    case_x += 1
+                    x = case_x * size_sprite
+            Position = Position.move(x, y)
+            if event.key == K_LEFT:
+                if [case_y] and [case_x - 1] != 'm':
+                    case_x -= 1
+                    x = case_x * size_sprite
+            Position = Position.move(x, y)
+            if event.key == K_UP:
+                if [case_y - 1] and [case_x] != 'm':
+                    case_y -= 1
+                    y = case_y * size_sprite
+            Position = Position.move(x, y)
+            if event.key == K_DOWN:
+                if [case_y + 1] and [case_x] != 'm':
+                    case_y += 1
+                    y = case_y * size_sprite
+            Position = Position.move(x, y)
     pygame.display.flip()
 """
         elif event.type == KEYDOWN:
@@ -62,6 +74,6 @@ while stay_open:
             elif event.type == K_LEFT:
                 mc.moove('left')
     pygame.display.flip()
-    if level.structure[mc.case_y][mc.case_x] == 'a':
-        stay_open = 0
+        if level.structure[mc.case_y][mc.case_x] == 'a':
+            stay_open = 0
 """
