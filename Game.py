@@ -20,6 +20,8 @@ pygame.init()
 
 window = pygame.display.set_mode((side_window, side_window))
 pygame.display.set_caption(title_window)
+sound = pygame.mixer.Sound(main_theme)
+sound.play()
 
 level_name = 'labyrinthe.txt'
 case_x = 1
@@ -29,11 +31,10 @@ y = 21
 
 stay_open = 1
 while stay_open:
-    # pygame.time.Clock().tick(30)
+    pygame.time.Clock().tick(30)
     level = Level(level_name)
     level.generate()
     level.show(window)
-    # pygame.mixer.music.load(main_theme) # marche pô
     Mc = pygame.image.load(hero_picture)
     Position = Mc.get_rect()
     window.blit(Mc, (x, y))
@@ -63,7 +64,10 @@ while stay_open:
                     y = case_y * size_sprite
             Position = Position.move(x, y)
     pygame.display.flip()
-"""
+    """
+    if level.structure[Mc.case_y] and [Mc.case_x] == 'a':
+        stay_open = 0
+
         elif event.type == KEYDOWN:
             if event.key == K_UP:
                 mc.moove('up')
