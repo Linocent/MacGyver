@@ -12,6 +12,7 @@ files: game.py, class.py, Constant.py, labyrinthe.txt, ressource
 import pygame
 from pygame.locals import *
 import mixer
+import random as rd
 
 from Classes import *
 from Constant import *
@@ -29,6 +30,19 @@ case_y = 0
 x = 0
 y = 0
 
+compt_obj = 0
+num_lock_item1 = 0
+num_lock_item2 = 0
+num_lock_item3 = 0
+s = pygame.image.load(syringe_picture)
+s.set_colorkey((255, 255, 255))
+s = pygame.transform.scale(s, (20, 20))
+t = pygame.image.load(pipe_picture)
+t.set_colorkey((255, 255, 255))
+t = pygame.transform.scale(t, (20, 20))
+e = pygame.image.load(ether_picture)
+e.set_colorkey((1, 1, 1))
+e = pygame.transform.scale(e, (20, 20))
 
 stay_open = 1
 while stay_open:
@@ -38,6 +52,19 @@ while stay_open:
     level.show(window)
     Mc = pygame.image.load(hero_picture)
     Position = Mc.get_rect()
+    if compt_obj == 0:
+        num_lock_item1 = rd.randint(0, len(level.free_coords)-1)
+        # level.free_coords.remove(level.free_coords[num_lock_item1])
+
+        num_lock_item2 = rd.randint(0, len(level.free_coords) - 1)
+        # level.free_coords.remove(level.free_coords[num_lock_item2])
+
+        num_lock_item3 = rd.randint(0, len(level.free_coords) - 1)
+        # level.free_coords.remove(level.free_coords[num_lock_item3])
+        compt_obj = 1
+    window.blit(s, level.free_coords[num_lock_item1])
+    window.blit(t, level.free_coords[num_lock_item2])
+    window.blit(e, level.free_coords[num_lock_item3])
     window.blit(Mc, (x, y))
 
     for event in pygame.event.get():

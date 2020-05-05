@@ -11,6 +11,7 @@ class Level:
         self.files = files
         self.structure = 0
         self.matwall = 0
+        self.free_coords = 0
 
     def generate(self):
         strlab = open(self.files, "r")
@@ -20,6 +21,7 @@ class Level:
             lablines[k] = lablines[k][0:len(lablines[k])]
             lablines[k] = list(lablines[k])
         matwall = np.ones([len(lablines), len(lablines[0])])
+        free_coords = []
         for i in range(len(matwall[0])):
             for j in range(len(matwall[0])):
                 if lablines[i][j] == 'w':
@@ -28,8 +30,13 @@ class Level:
                     matwall[i, j] = 2
                 if lablines[i][j] == 'd':
                     matwall[i, j] = 3
+        for i in range(len(matwall[0])):
+            for j in range(len(matwall[0])):
+                if matwall[i][j] == 1:
+                    free_coords.append((j*size_sprite, i*size_sprite))
         self.matwall = matwall
         self.structure = lablines
+        self.free_coords = free_coords
         strlab.close()
 
     def show(self, window):
