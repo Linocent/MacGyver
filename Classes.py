@@ -5,6 +5,7 @@ from pygame.locals import *
 from Constant import *
 import numpy as np
 
+
 class Level:
     def __init__(self, files):
         self.files = files
@@ -62,7 +63,7 @@ class Hero:
         self.level = level
         self.position = self.hero.get_rect()
 
-    def movement(self, position):
+    def moovement(self, position):
         if position == 'right':
             if self.level.structure[self.case_y] and [self.case_x + 1] != 'm':
                 self.case_x += 1

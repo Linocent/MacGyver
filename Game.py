@@ -46,24 +46,28 @@ while stay_open:
         elif event.type == KEYDOWN:
             if event.key == K_ESCAPE:
                 stay_open = 0
-            if (event.key == K_RIGHT) and (level.matwall[case_y, case_x+1] != 0):
-                case_x += 1
-                x = case_x * size_sprite
-            Position = Position.move(x, y)
-            if (event.key == K_LEFT) and (level.matwall[case_y, case_x-1] != 0):
-                case_x -= 1
-                x = case_x * size_sprite
-            Position = Position.move(x, y)
+            if (event.key == K_RIGHT) and (case_x+1 < number_sprite_by_side):
+                if level.matwall[case_y, case_x+1] != 0:
+                    case_x += 1
+                    x = case_x * size_sprite
+                    Position = Position.move(x, y)
+            if (event.key == K_LEFT) and (case_x-1 >= 0):
+                if level.matwall[case_y, case_x - 1] != 0:
+                    case_x -= 1
+                    x = case_x * size_sprite
+                    Position = Position.move(x, y)
             if (event.key == K_UP) and (level.matwall[case_y-1, case_x] != 0):
-                case_y -= 1
-                y = case_y * size_sprite
-            Position = Position.move(x, y)
-            if (event.key == K_DOWN) and (level.matwall[case_y+1, case_x] != 0):
-                case_y += 1
-                y = case_y * size_sprite
+                if case_y-1 >= 0:
+                    case_y -= 1
+                    y = case_y * size_sprite
+                    Position = Position.move(x, y)
+            if (event.key == K_DOWN) and (case_y+1 < number_sprite_by_side):
+                if level.matwall[case_y + 1, case_x] != 0:
+                    case_y += 1
+                    y = case_y * size_sprite
+                Position = Position.move(x, y)
             if level.matwall[case_x, case_y] == 2:
                 stay_open = 0
-            Position = Position.move(x, y)
         pygame.display.flip()
     """
     if level.structure[Mc.case_y] and [Mc.case_x] == 'a':
