@@ -16,7 +16,7 @@ ether_picture = "ressource/ether.png"
 syringe_picture = "ressource/seringue.png"
 needle_picture = "ressource/aiguille.png"
 pipe_picture = "ressource/tube_plastique.png"
-hero_picture = "ressource/MacGyver.png"
+hero_picture = "ressource/MacGyver20.png"
 
 # music & sound
 main_theme = "ressource/McGyver_sound.ogg"
