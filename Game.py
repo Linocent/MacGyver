@@ -6,7 +6,7 @@ Help Mac Gyver the game
 We must to take item and go to guardian to deliver Mac Gyver
 
 Script Python
-files: game.py, class.py, Constant.py, level, ressource
+files: game.py, class.py, Constant.py, labyrinthe.txt, ressource
 """
 
 import pygame
@@ -20,14 +20,15 @@ pygame.init()
 
 window = pygame.display.set_mode((side_window, side_window))
 pygame.display.set_caption(title_window)
-sound = pygame.mixer.Sound(main_theme)
-sound.play()
+# sound = pygame.mixer.Sound(main_theme)
+# sound.play()
 
 level_name = 'labyrinthe.txt'
-case_x = 1
-case_y = 1
-x = 21
-y = 21
+case_x = 0
+case_y = 0
+x = 0
+y = 0
+
 
 stay_open = 1
 while stay_open:
@@ -43,40 +44,40 @@ while stay_open:
         if event.type == QUIT:
             stay_open = 0
         elif event.type == KEYDOWN:
-            if event.key == K_RIGHT:
-                if [case_y] and [case_x + 1] != 'm':
-                    case_x += 1
-                    x = case_x * size_sprite
+            if event.key == K_ESCAPE:
+                stay_open = 0
+            if (event.key == K_RIGHT) and (level.matwall[case_y, case_x+1] != 0):
+                case_x += 1
+                x = case_x * size_sprite
             Position = Position.move(x, y)
-            if event.key == K_LEFT:
-                if [case_y] and [case_x - 1] != 'm':
-                    case_x -= 1
-                    x = case_x * size_sprite
+            if (event.key == K_LEFT) and (level.matwall[case_y, case_x-1] != 0):
+                case_x -= 1
+                x = case_x * size_sprite
             Position = Position.move(x, y)
-            if event.key == K_UP:
-                if [case_y - 1] and [case_x] != 'm':
-                    case_y -= 1
-                    y = case_y * size_sprite
+            if (event.key == K_UP) and (level.matwall[case_y-1, case_x] != 0):
+                case_y -= 1
+                y = case_y * size_sprite
             Position = Position.move(x, y)
-            if event.key == K_DOWN:
-                if [case_y + 1] and [case_x] != 'm':
-                    case_y += 1
-                    y = case_y * size_sprite
+            if (event.key == K_DOWN) and (level.matwall[case_y+1, case_x] != 0):
+                case_y += 1
+                y = case_y * size_sprite
+            if level.matwall[case_x, case_y] == 2:
+                stay_open = 0
             Position = Position.move(x, y)
-    pygame.display.flip()
+        pygame.display.flip()
     """
     if level.structure[Mc.case_y] and [Mc.case_x] == 'a':
         stay_open = 0
 
         elif event.type == KEYDOWN:
             if event.key == K_UP:
-                mc.moove('up')
+                Mc.direction('up')
             elif event.type == K_DOWN:
-                mc.moove('down')
+                Mc.direction('down')
             elif event.type == K_RIGHT:
-                mc.moove('right')
+                Mc.direction('right')
             elif event.type == K_LEFT:
-                mc.moove('left')
+                Mc.direction('left')
     pygame.display.flip()
         if level.structure[mc.case_y][mc.case_x] == 'a':
             stay_open = 0

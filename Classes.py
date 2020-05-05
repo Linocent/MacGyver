@@ -9,6 +9,7 @@ class Level:
     def __init__(self, files):
         self.files = files
         self.structure = 0
+        self.matwall = 0
 
     def generate(self):
         strlab = open(self.files, "r")
@@ -18,10 +19,14 @@ class Level:
             lablines[k] = lablines[k][0:len(lablines[k])]
             lablines[k] = list(lablines[k])
         matwall = np.ones([len(lablines), len(lablines[0])])
-        for i in range (len(matwall[0])):
+        for i in range(len(matwall[0])):
             for j in range(len(matwall[0])):
                 if lablines[i][j] == 'w':
                     matwall[i, j] = 0
+                if lablines[i][j] == 'a':
+                    matwall[i, j] = 2
+                if lablines[i][j] == 'd':
+                    matwall[i, j] = 3
         self.matwall = matwall
         self.structure = lablines
         strlab.close()
