@@ -2,7 +2,7 @@
 
 # setting of window
 number_sprite_by_side = 15
-size_sprite = 20
+size_sprite = 40
 side_window = number_sprite_by_side * size_sprite
 
 # information of window
@@ -16,7 +16,7 @@ ether_picture = "ressource/ether.png"
 syringe_picture = "ressource/seringue.png"
 needle_picture = "ressource/aiguille.png"
 pipe_picture = "ressource/tube_plastique.png"
-hero_picture = "ressource/MacGyver20.png"
+hero_picture = "ressource/MacGyver.png"
 
 # music & sound
 main_theme = "ressource/McGyver_sound.ogg"

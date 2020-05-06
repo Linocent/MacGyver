@@ -41,8 +41,11 @@ class Level:
 
     def show(self, window):
         Wall = pygame.image.load(wall_picture)
+        Wall = pygame.transform.scale(Wall, (40, 40))
         Floor = pygame.image.load(floor_picture)
+        Floor = pygame.transform.scale(Floor, (40, 40))
         Gardian = pygame.image.load(guardian_picture).convert_alpha()
+        Gardian = pygame.transform.scale(Gardian, (40, 40))
 
         num_line = 0
         for line in self.structure:
