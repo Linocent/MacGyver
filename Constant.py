@@ -17,6 +17,8 @@ syringe_picture = "ressource/seringue.png"
 needle_picture = "ressource/aiguille.png"
 pipe_picture = "ressource/tube_plastique.png"
 hero_picture = "ressource/MacGyver.png"
+game_over_picture = "ressource/game_over.jpg"
+you_win_picture = "ressource/you_win.jpg"
 
 # music & sound
 main_theme = "ressource/McGyver_sound.ogg"
