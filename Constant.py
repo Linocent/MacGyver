@@ -1,24 +1,25 @@
 """this is the constant of the game"""
 
 # setting of window
-number_sprite_by_side = 15
-size_sprite = 40
-side_window = number_sprite_by_side * size_sprite
+NUMBER_SPRITE_BY_SIDE = 15
+SIZE_SPRITE = 40
+SIDE_WINDOW = NUMBER_SPRITE_BY_SIDE * SIZE_SPRITE
 
 # information of window
-title_window = "Help Mac Gyver"
+TITLE_WINDOW = "Help Mac Gyver"
 
 # list of pictures
-wall_picture = "ressource/wall.png"
-floor_picture = "ressource/floor.png"
-guardian_picture = "ressource/Gardien.png"
-ether_picture = "ressource/ether.png"
-syringe_picture = "ressource/seringue.png"
-needle_picture = "ressource/aiguille.png"
-pipe_picture = "ressource/tube_plastique.png"
-hero_picture = "ressource/MacGyver.png"
-game_over_picture = "ressource/game_over.jpg"
-you_win_picture = "ressource/you_win.jpg"
+WALL_PICTURE = "ressource/wall.png"
+FLOOR_PICTURE = "ressource/floor.png"
+GARDIAN_PICTURE = "ressource/Gardien.png"
+ETHER_PICTURE = "ressource/ether.png"
+SYRINGE_PICTURE = "ressource/seringue.png"
+NEEDLE_PICTURE = "ressource/aiguille.png"
+PIPE_PICTURE = "ressource/tube_plastique.png"
+HERO_PICTURE = "ressource/MacGyver.png"
+GAMEOVER_PICTURE = "ressource/game_over.jpg"
+WIN_PICTURE = "ressource/you_win.jpg"
+COUNTER = "ressource/test_compteur.png"
 
 # music & sound
-main_theme = "ressource/McGyver_sound.ogg"
+MAIN_THEME = "ressource/McGyver_sound.ogg"

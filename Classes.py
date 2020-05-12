@@ -33,49 +33,69 @@ class Level:
         for i in range(len(matwall[0])):
             for j in range(len(matwall[0])):
                 if matwall[i][j] == 1:
-                    free_coords.append((j*size_sprite, i*size_sprite))
+                    free_coords.append((j*SIZE_SPRITE, i*SIZE_SPRITE))
         self.matwall = matwall
         self.structure = lablines
         self.free_coords = free_coords
         strlab.close()
 
     def show(self, window):
-        Wall = pygame.image.load(wall_picture)
-        Wall = pygame.transform.scale(Wall, (40, 40))
-        Floor = pygame.image.load(floor_picture)
-        Floor = pygame.transform.scale(Floor, (40, 40))
-        Gardian = pygame.image.load(guardian_picture).convert_alpha()
-        Gardian = pygame.transform.scale(Gardian, (40, 40))
+        WALL = pygame.image.load(WALL_PICTURE)
+        WALL = pygame.transform.scale(WALL, (40, 40))
+        FLOOR = pygame.image.load(FLOOR_PICTURE)
+        FLOOR = pygame.transform.scale(FLOOR, (40, 40))
+        GARDIAN = pygame.image.load(GARDIAN_PICTURE).convert_alpha()
+        GARDIAN = pygame.transform.scale(GARDIAN, (40, 40))
 
         num_line = 0
         for line in self.structure:
             num_case = 0
             for Char in line:
-                x = num_case * size_sprite
-                y = num_line * size_sprite
+                x = num_case * SIZE_SPRITE
+                y = num_line * SIZE_SPRITE
                 if Char == 'w':
-                    window.blit(Wall, (x,y))
+                    window.blit(WALL, (x, y))
                 elif (Char == '0') or (Char == 'd'):
-                    window.blit(Floor, (x,y))
+                    window.blit(FLOOR, (x, y))
                 elif Char == 'a':
-                    window.blit(Gardian, (x,y))
+                    window.blit(GARDIAN, (x, y))
                 num_case += 1
             num_line += 1
 
 
 class Hero:
     def __init__(self, level):
-        self.hero = self.window.blit(hero_picture, (self.x, self.y))
-        self.case_x = 1
-        self.case_y = 1
-        self.x = 21
-        self.y = 21
-        self.level = level
+        self.hero = pygame.image.load(HERO_PICTURE)
+        self.hero = pygame.transform.scale(HERO_PICTURE, (40, 40))
+        self.direction = self.window.blit(HERO_PICTURE, (self.x, self.y))
+        self.window = pygame.display.set_mode((SIDE_WINDOW, SIDE_WINDOW))
+        self.case_x = 0
+        self.case_y = 0
+        self.x = 0
+        self.y = 0
         self.position = self.hero.get_rect()
+        self.level = level
 
-    def moovement(self, position):
-        if position == 'right':
-            if self.level.structure[self.case_y] and [self.case_x + 1] != 'm':
-                self.case_x += 1
-                self.x = self.case_x * size_sprite
-        self.position = self.position.move(self.case_x, self.case_y)
+    def move(self, direction):
+        for event in pygame.event.get():
+            if direction == 'right':
+                if self.case_x + 1 < NUMBER_SPRITE_BY_SIDE:
+                    if self.level.matwall[self.case_y, self.case_x + 1] != 0:
+                        self.case_x += 1
+                        self.x = self.case_x * SIZE_SPRITE
+                        self.position = self.position.move(self.x, self.y)
+                if (event.key == K_LEFT) and (self.case_x - 1 >= 0):
+                    if self.level.matwall[self.case_y, self.case_x - 1] != 0:
+                        self.case_x -= 1
+                        self.x = self.case_x * SIZE_SPRITE
+                        self.position = self.position.move(self.x, self.y)
+                if (event.key == K_UP) and (self.level.matwall[self.case_y - 1, self.case_x] != 0):
+                    if self.case_y - 1 >= 0:
+                        self.case_y -= 1
+                        self.y = self.case_y * SIZE_SPRITE
+                        self.position = self.position.move(self.x, self.y)
+                if (event.key == K_DOWN) and (self.case_y + 1 < NUMBER_SPRITE_BY_SIDE):
+                    if self.level.matwall[self.case_y + 1, self.case_x] != 0:
+                        self.case_y += 1
+                        self.y = self.case_y * SIZE_SPRITE
+                        self.position = self.position.move(self.x, self.y)
