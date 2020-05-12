@@ -11,7 +11,7 @@ TITLE_WINDOW = "Help Mac Gyver"
 # list of pictures
 WALL_PICTURE = "ressource/wall.png"
 FLOOR_PICTURE = "ressource/floor.png"
-GARDIAN_PICTURE = "ressource/Gardien.png"
+GUARDIAN_PICTURE = "ressource/Gardien.png"
 ETHER_PICTURE = "ressource/ether.png"
 SYRINGE_PICTURE = "ressource/seringue.png"
 NEEDLE_PICTURE = "ressource/aiguille.png"
@@ -23,3 +23,4 @@ COUNTER = "ressource/test_compteur.png"
 
 # music & sound
 MAIN_THEME = "ressource/McGyver_sound.ogg"
+COLLECT_ITEM = "ressource/collect_item.ogg"
