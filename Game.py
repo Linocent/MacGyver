@@ -6,70 +6,48 @@ Help Mac Gyver the game
 We must to take item and go to guardian to deliver Mac Gyver
 
 Script Python
-files: game.py, class.py, Constant.py, labyrinthe.txt, ressource
-"""
+files: game.py, class.py, constant.py, labyrinthe.txt.
+folder: ressource"""
 
 import pygame
-from pygame.locals import *
-import mixer
-import random as rd
-import time
+from classes import Level, Hero
+from constant import SIDE_WINDOW, TITLE_WINDOW, SIZE_SPRITE, MAIN_THEME
 
-from Classes import *
-from Constant import *
+# pylint: disable=no-member
+# Error of compatibility between pygame and pylint.
 
 pygame.init()
 
 window = pygame.display.set_mode((SIDE_WINDOW, SIDE_WINDOW + SIZE_SPRITE))
 pygame.display.set_caption(TITLE_WINDOW)
-counter = pygame.image.load(COUNTER)
 sound = pygame.mixer.Sound(MAIN_THEME)
 sound.play()
 
-level_name = 'labyrinthe.txt'
+LEVEL_NAME = 'labyrinthe.txt'
 
-
-Game_Over = pygame.image.load(GAMEOVER_PICTURE)
-Game_Over = pygame.transform.scale(Game_Over, (40*15, 40*16))
-You_Win = pygame.image.load(WIN_PICTURE)
-You_Win = pygame.transform.scale(You_Win, (40*15, 40*16))
 mc = Hero()
-level = Level(level_name)
+level = Level(LEVEL_NAME)
 level.generate()
-stay_open = 1
 
-while stay_open:
+STAY_OPEN = 1
+while STAY_OPEN == 1:
     pygame.time.Clock().tick(30)
     level.show_map(window, mc)
     level.show_item(window, mc)
 
     for event in pygame.event.get():
-        if event.type == QUIT:
-            stay_open = 0
-        elif event.type == KEYDOWN:
-            if event.key == K_ESCAPE:
-                stay_open = 0
-            elif event.key == K_UP:
+        if event.type == pygame.QUIT:
+            STAY_OPEN = 0
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                STAY_OPEN = 0
+            elif event.key == pygame.K_UP:
                 mc.move('up', level)
-            elif event.key == K_DOWN:
+            elif event.key == pygame.K_DOWN:
                 mc.move('down', level)
-            elif event.key == K_RIGHT:
+            elif event.key == pygame.K_RIGHT:
                 mc.move('right', level)
-            elif event.key == K_LEFT:
+            elif event.key == pygame.K_LEFT:
                 mc.move('left', level)
         pygame.display.flip()
-        if level.matwall[mc.case_x, mc.case_y] == 2:
-            if (mc.walk_s == 0) and (mc.walk_e == 0) and (mc.walk_t == 0):
-                stay_open = 0
-                window.blit(You_Win, (0, 0))
-                pygame.display.flip()
-                time.sleep(5)
-                stay_open = 0
-                pygame.quit()
-
-            else:
-                window.blit(Game_Over, (0, 0))
-                pygame.display.flip()
-                time.sleep(5)
-                stay_open = 0
-                pygame.quit()
+        STAY_OPEN = level.end_screen(window, mc, STAY_OPEN)
