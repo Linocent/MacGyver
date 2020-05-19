@@ -187,4 +187,3 @@ class Level:
                 pygame.time.delay(3000)
             return 0
         return stay_open
-
