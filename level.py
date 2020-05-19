@@ -1,9 +1,12 @@
-"""Class of the game"""
+"""Class which manage display of the game."""
 
 import random as rd
 import pygame
-from constant import *
 import numpy as np
+from constant import SIZE_SPRITE, SIDE_WINDOW, WALL_PICTURE, \
+    FLOOR_PICTURE, GUARDIAN_PICTURE, ETHER_PICTURE,\
+    SYRINGE_PICTURE, PIPE_PICTURE, GAME_OVER_PICTURE, \
+    WIN_PICTURE, COUNTER, COLLECT_ITEM
 
 
 class Level:
@@ -11,7 +14,7 @@ class Level:
     """ This class will build the lab and manage items """
 
     # pylint: disable=too-many-instance-attributes
-    # Eight is reasonable in this case.
+    # It is reasonable in this case.
     # pylint: disable=too-many-branches
     # Fifteen is reasonable in this case.
 
@@ -33,7 +36,7 @@ class Level:
         self.guardian = pygame.image.load(GUARDIAN_PICTURE).convert_alpha()
         self.guardian = pygame.transform.scale(self.guardian, (SIZE_SPRITE, SIZE_SPRITE))
 
-        # Var of items1.
+        # Var of items.
 
         self.syringe = pygame.image.load(SYRINGE_PICTURE)
         self.syringe.set_colorkey((255, 255, 255))
@@ -185,42 +188,3 @@ class Level:
             return 0
         return stay_open
 
-
-class Hero:
-
-    """ This class will manage the movement."""
-
-    def __init__(self):
-
-        self.hero = pygame.image.load(HERO_PICTURE)
-        self.hero = pygame.transform.scale(self.hero, (SIZE_SPRITE, SIZE_SPRITE))
-        self.case_x = 0  # en case
-        self.case_y = 0
-        self.walk_s = 1
-        self.walk_e = 1
-        self.walk_t = 1
-
-    def move(self, direction, level):
-
-        """Manage movement."""
-
-        if (direction == 'right') and (self.case_x + 1 < NUMBER_SPRITE_BY_SIDE):
-            if level.mat_wall[self.case_y, self.case_x + 1] != 0:
-                self.case_x += 1
-        if (direction == 'left') and (self.case_x - 1 >= 0):
-            if level.mat_wall[self.case_y, self.case_x - 1] != 0:
-                self.case_x -= 1
-        if (direction == 'up') and (level.mat_wall[self.case_y - 1, self.case_x] != 0):
-            if self.case_y - 1 >= 0:
-                self.case_y -= 1
-        if (direction == 'down') and (self.case_y + 1 < NUMBER_SPRITE_BY_SIDE):
-            if level.mat_wall[self.case_y + 1, self.case_x] != 0:
-                self.case_y += 1
-
-    def give_att(self):
-
-        """None use."""
-
-        print(self.walk_t)
-        print(self.walk_e)
-        print(self.walk_s)
