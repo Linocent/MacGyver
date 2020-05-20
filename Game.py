@@ -32,7 +32,7 @@ level = Level(LEVEL_NAME)
 level.generate()
 
 
-def main():
+def game():
 
     stay_open = 1
     while stay_open == 1:
@@ -59,4 +59,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    game()
